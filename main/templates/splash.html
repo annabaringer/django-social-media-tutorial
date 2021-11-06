@@ -8,24 +8,53 @@
 {% block body %}
 
 <div>
-    <h1>REGISTER / LOGIN</h1>
-    <div>
-      <h2>Sign Up</h2>
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <h1>REGISTER / LOGIN</h1>
+      </a>
+    </div>
+  </nav>
+
+  <div class="card">
       <form method="POST" action="/signup/">
         {% csrf_token %}
-        <input name="username" type="text" placeholder="Username" />
-        <input name="email" type="email" placeholder="Enter Email" />
-        <input name="password" type="password" placeholder="Password" />
-        <button type="submit">Sign Up</button>
+        <div class="mb-3">
+          <h2 class="form-label">Sign Up</h2>
+        </div> 
+
+        <div class="mb-3">
+          <input class="form-control" name="username" type="text" placeholder="Username" />
+        </div> 
+
+        <div class="mb-3">
+          <input class="form-control" name="email" type="email" placeholder="Enter Email" />
+        </div> 
+
+        <div class="mb-3">
+          <input class="form-control" name="password" type="password" placeholder="Password" />
+        </div> 
+
+        <button class="btn btn-primary" type="submit">Sign Up</button>
       </form>
-    </div>
-    <div>
-      <h2>Log In</h2>
+  </div>
+  <br>
+  <div class="card">
       <form method="POST" action="/login/">
         {% csrf_token %}
-        <input name="username" type="text" placeholder="Enter username" />
-        <input name="password" type="password" placeholder="Password" />
-        <button type="submit">Login</button>
+        <div class="mb-3">
+          <h2 class="form-label">Log In</h2>
+        </div> 
+
+        <div class="mb-3">
+          <input class="form-control" name="username" type="text" placeholder="Enter username" />
+        </div> 
+
+        <div class="mb-3">
+          <input class="form-control" name="password" type="password" placeholder="Password" />
+        </div> 
+
+        <button class="btn btn-primary" type="submit">Login</button>
       </form>
     </div>
   </div>
