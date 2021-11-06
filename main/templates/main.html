@@ -2,12 +2,66 @@
 {% load static %}
 
 {% block title %}
-title
+home :)
 {% endblock %}
 
 {% block styles %}
 {% endblock %}
 
 {% block body %}
-<h1>hello!</h1>
-{% endblock %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <h1>welcome to the bird app, {{ user.username }}!</h1>
+            <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+        </a>
+    </div>
+</nav>
+
+
+<div>
+    <form method="POST" action="/">
+        {% csrf_token %}
+        <div class="mb-3">
+            <h4 class="form-label">tweet something!</h2>
+        </div> 
+
+        <div class="mb-3">
+            <input class="form-control" name="body" placeholder="what's on your mind :)" />
+        </div> 
+
+        <input class="btn btn-primary" type="submit" value="post tweet" />
+    </form>
+
+</div>  
+
+
+<div>
+    {% for tweet in tweets %}
+    <div class="card">
+
+        <div class="card-header">
+            <p>
+                <strong>{{ tweet.author.username }}</strong> 
+                <i>{{ tweet.created_at }}</i>
+            </p>
+        </div>
+
+        <div class="card-body">
+            <p class="card-text">{{ tweet.body }}</p>
+            {% if tweet.author == user %}
+            <a href="delete?id={{tweet.id}}">delete tweet</a>
+            {% endif %}
+            <p><a href="/like?id={{tweet.id}}">
+                {% if request.user in tweet.likes.all %}
+                  unlike
+                {% else %}
+                  like
+                {% endif %}
+              </a> ({{ tweet.likes.count }} &hearts;)
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+  {% endblock %}
